@@ -37,10 +37,6 @@ namespace MergeSort
             return Merge(left, right);
         }
 
-        private static List<int> MergeSortList(List<int> list) {
-            return MergeSort(list.ToArray()).ToList();
-        }
-
         private static void Divide(int[] arr, List<int> left, List<int> right)
         {
             for (int i = 0; i < arr.Length; i++)
@@ -54,6 +50,10 @@ namespace MergeSort
         private static bool IsOdd(int i)
         {
             return i % 2 > 0;
+        }
+
+        private static List<int> MergeSortList(List<int> list) {
+            return MergeSort(list.ToArray()).ToList();
         }
 
         private static int[] Merge(List<int> left, List<int> right)
@@ -71,6 +71,11 @@ namespace MergeSort
             return res.ToArray();
         }
 
+        private static bool NotEmpty(List<int> list)
+        {
+            return list.Count > 0;
+        }
+
         private static void MoveSmallerValInLeftOrRightToRes(List<int> left, List<int> right, List<int> res)
         {
             if (left.First() <= right.First())
@@ -79,19 +84,16 @@ namespace MergeSort
                 MoveValFromSrcToRes(right, res);
         }
 
-        private static bool NotEmpty(List<int> list) {
-            return list.Count > 0;
+        private static void MoveValFromSrcToRes(List<int> list, List<int> res)
+        {
+            res.Add(list.First());
+            list.RemoveAt(0);
         }
 
         private static void MoveRemainingValuesFromSrcToRes(List<int> list, List<int> res)
         {
             while (NotEmpty(list))
                 MoveValFromSrcToRes(list, res);
-        }
-
-        private static void MoveValFromSrcToRes(List<int> list, List<int> res) {
-            res.Add(list.First());
-            list.RemoveAt(0);
         }
 
         static void PrintMas(int[] arr)
