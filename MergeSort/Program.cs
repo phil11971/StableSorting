@@ -23,7 +23,7 @@ namespace MergeSort
             Console.ReadKey();
         }
 
-        private static int[] MergeSort(int[] arr)
+        static int[] MergeSort(int[] arr)
         {
             if (arr.Length <= 1) return arr;
 
@@ -31,13 +31,10 @@ namespace MergeSort
             var right = new List<int>();
 
             for (int i = 0; i < arr.Length / 2; i++)
-            {
                 left.Add(arr[i]);
-            }
+
             for (int i = arr.Length / 2; i < arr.Length; i++)
-            {
                 right.Add(arr[i]);
-            }
 
             left = MergeSort(left.ToArray()).ToList();
             right = MergeSort(right.ToArray()).ToList();
