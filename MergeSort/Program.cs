@@ -10,12 +10,12 @@ namespace MergeSort
     {
         static void Main(string[] args)
         {
-            int[] mas = new int[] { 9, 6, 10, 8, 43, 2, 6, 24, 6 };
-
+            int[] mas = new int[] { 9, 6, 10, 8, 43, 2 , 6, 24, 6};
+            int[] tmp = new int[3];
             Console.WriteLine("Src mas");
             PrintMas(mas);
 
-            MergeSort(ref mas, 0, mas.Length - 1);
+            mas = MergeSort(mas);
 
             Console.WriteLine("Res mas");
             PrintMas(mas);
@@ -23,41 +23,75 @@ namespace MergeSort
             Console.ReadKey();
         }
 
-        //Сложность алгоритма: O(n*logn)
-        static void MergeSort(ref int[] elements, int low, int high)
+        private static int[] MergeSort(int[] arr)
         {
-            if (low < high)
+            if (arr.Length <= 1) return arr;
+
+            var left = new List<int>();
+            var right = new List<int>();
+            Divide(arr, left, right);
+
+            left = MergeSortList(left);
+            right = MergeSortList(right);
+
+            return Merge(left, right);
+        }
+
+        private static List<int> MergeSortList(List<int> list) {
+            return MergeSort(list.ToArray()).ToList();
+        }
+
+        private static void Divide(int[] arr, List<int> left, List<int> right)
+        {
+            for (int i = 0; i < arr.Length; i++)
             {
-                int mid = (low + high) / 2;
-                MergeSort(ref elements, low, mid);
-                MergeSort(ref elements, mid + 1, high);
-                Merge(elements, low, mid, high);
+                if (IsOdd(i))
+                    left.Add(arr[i]);
+                else right.Add(arr[i]);
             }
         }
 
-        private static void Merge(int[] arr, int low, int mid, int high)
+        private static bool IsOdd(int i)
         {
+            return i % 2 > 0;
+        }
 
-            int n = high - low + 1;
-            int[] temp = new int[n];
+        private static int[] Merge(List<int> left, List<int> right)
+        {
+            var res = new List<int>();
 
-            int i = low, j = mid + 1;
-            int k = 0;
-
-            while (i <= mid || j <= high)
+            while (NotEmpty(left) && NotEmpty(right))
             {
-                if (i > mid)
-                    temp[k++] = arr[j++];
-                else if (j > high)
-                    temp[k++] = arr[i++];
-                else if (arr[i] < arr[j])
-                    temp[k++] = arr[i++];
-                else
-                    temp[k++] = arr[j++];
+                MoveSmallerValInLeftOrRightToRes(left, right, res);
             }
 
-            for (j = 0; j < n; j++)
-                arr[low + j] = temp[j];
+            MoveRemainingValuesFromSrcToRes(left, res);
+            MoveRemainingValuesFromSrcToRes(right, res);
+
+            return res.ToArray();
+        }
+
+        private static void MoveSmallerValInLeftOrRightToRes(List<int> left, List<int> right, List<int> res)
+        {
+            if (left.First() <= right.First())
+                MoveValFromSrcToRes(left, res);
+            else
+                MoveValFromSrcToRes(right, res);
+        }
+
+        private static bool NotEmpty(List<int> list) {
+            return list.Count > 0;
+        }
+
+        private static void MoveRemainingValuesFromSrcToRes(List<int> list, List<int> res)
+        {
+            while (NotEmpty(list))
+                MoveValFromSrcToRes(list, res);
+        }
+
+        private static void MoveValFromSrcToRes(List<int> list, List<int> res) {
+            res.Add(list.First());
+            list.RemoveAt(0);
         }
 
         static void PrintMas(int[] arr)
