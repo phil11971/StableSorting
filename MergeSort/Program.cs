@@ -15,7 +15,7 @@ namespace MergeSort
             Console.WriteLine("Src mas");
             PrintMas(mas);
 
-            mas = MergeSort(mas, 0, mas.Length - 1);
+            MergeSort(ref mas, 0, mas.Length - 1);
 
             Console.WriteLine("Res mas");
             PrintMas(mas);
@@ -24,23 +24,22 @@ namespace MergeSort
         }
 
         //Сложность алгоритма: O(n*logn)
-        static int[] MergeSort(int[] elements, int low, int high)
+        static void MergeSort(ref int[] elements, int low, int high)
         {
             if (low < high)
             {
                 int mid = (low + high) / 2;
-                MergeSort(elements, low, mid);
-                MergeSort(elements, mid + 1, high);
+                MergeSort(ref elements, low, mid);
+                MergeSort(ref elements, mid + 1, high);
                 Merge(elements, low, mid, high);
             }
-            return elements;
         }
 
-        private static void Merge(int[] subset, int low, int mid, int high)
+        private static void Merge(int[] arr, int low, int mid, int high)
         {
 
             int n = high - low + 1;
-            int[] Temp = new int[n];
+            int[] temp = new int[n];
 
             int i = low, j = mid + 1;
             int k = 0;
@@ -48,16 +47,17 @@ namespace MergeSort
             while (i <= mid || j <= high)
             {
                 if (i > mid)
-                    Temp[k++] = subset[j++];
+                    temp[k++] = arr[j++];
                 else if (j > high)
-                    Temp[k++] = subset[i++];
-                else if (subset[i] < subset[j])
-                    Temp[k++] = subset[i++];
+                    temp[k++] = arr[i++];
+                else if (arr[i] < arr[j])
+                    temp[k++] = arr[i++];
                 else
-                    Temp[k++] = subset[j++];
+                    temp[k++] = arr[j++];
             }
+
             for (j = 0; j < n; j++)
-                subset[low + j] = Temp[j];
+                arr[low + j] = temp[j];
         }
 
         static void PrintMas(int[] arr)

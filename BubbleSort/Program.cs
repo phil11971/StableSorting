@@ -25,16 +25,22 @@ namespace BubbleSort
 
         //Сложность алгоритма: O(n^2)
         static int[] BubbleSort(int[] arr) {
+            bool wasSorting = false;
             for (int i = arr.Length - 1; i > 0; i--)
             {
                 for (int j = 0; j < i; j++)
                 {
-                    if( arr[j] > arr[j+1] ){
+                    if( arr[j] > arr[j+1] )
+                    {
                         int tmp = arr[j];
                         arr[j] = arr[j+1];
                         arr[j+1] = tmp;
+                        wasSorting = true;
                     }
-                }              
+                }
+                if (wasSorting)
+                    wasSorting = false;
+                else return arr;
             }
             return arr;
         }
