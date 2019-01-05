@@ -29,71 +29,53 @@ namespace MergeSort
 
             var left = new List<int>();
             var right = new List<int>();
-            Divide(arr, left, right);
 
-            left = MergeSortList(left);
-            right = MergeSortList(right);
+            for (int i = 0; i < arr.Length / 2; i++)
+            {
+                left.Add(arr[i]);
+            }
+            for (int i = arr.Length / 2; i < arr.Length; i++)
+            {
+                right.Add(arr[i]);
+            }
+
+            left = MergeSort(left.ToArray()).ToList();
+            right = MergeSort(right.ToArray()).ToList();
 
             return Merge(left, right);
-        }
-
-        private static void Divide(int[] arr, List<int> left, List<int> right)
-        {
-            for (int i = 0; i < arr.Length; i++)
-            {
-                if (IsOdd(i))
-                    left.Add(arr[i]);
-                else right.Add(arr[i]);
-            }
-        }
-
-        private static bool IsOdd(int i)
-        {
-            return i % 2 > 0;
-        }
-
-        private static List<int> MergeSortList(List<int> list) {
-            return MergeSort(list.ToArray()).ToList();
         }
 
         private static int[] Merge(List<int> left, List<int> right)
         {
             var res = new List<int>();
 
-            while (NotEmpty(left) && NotEmpty(right))
+            while (left.Count > 0 && right.Count > 0)
             {
-                MoveSmallerValInLeftOrRightToRes(left, right, res);
+                if (left.First() <= right.First())
+                {
+                    res.Add(left.First());
+                    left.RemoveAt(0);
+                }
+                else
+                {
+                    res.Add(right.First());
+                    right.RemoveAt(0);
+                }
             }
 
-            MoveRemainingValuesFromSrcToRes(left, res);
-            MoveRemainingValuesFromSrcToRes(right, res);
+            while (left.Count > 0)
+            {
+                res.Add(left.First());
+                left.RemoveAt(0);
+            }
+
+            while (right.Count > 0)
+            {
+                res.Add(right.First());
+                right.RemoveAt(0);
+            }
 
             return res.ToArray();
-        }
-
-        private static bool NotEmpty(List<int> list)
-        {
-            return list.Count > 0;
-        }
-
-        private static void MoveSmallerValInLeftOrRightToRes(List<int> left, List<int> right, List<int> res)
-        {
-            if (left.First() <= right.First())
-                MoveValFromSrcToRes(left, res);
-            else
-                MoveValFromSrcToRes(right, res);
-        }
-
-        private static void MoveValFromSrcToRes(List<int> list, List<int> res)
-        {
-            res.Add(list.First());
-            list.RemoveAt(0);
-        }
-
-        private static void MoveRemainingValuesFromSrcToRes(List<int> list, List<int> res)
-        {
-            while (NotEmpty(list))
-                MoveValFromSrcToRes(list, res);
         }
 
         static void PrintMas(int[] arr)
