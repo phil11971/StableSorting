@@ -15,7 +15,7 @@ namespace RadixSort
             Console.WriteLine("Src mas");
             PrintMas(mas);
 
-            mas = RadixSort(mas, 2);//следить за length
+            RadixSort(mas, 2);//следить за length
 
             Console.WriteLine("Res mas");
             PrintMas(mas);
@@ -24,7 +24,7 @@ namespace RadixSort
         }
 
         //Cложность алгоритма: O(nk)
-        static int[] RadixSort(int[] arr, int length)//length - кол-во разрядов в числе
+        public static void RadixSort(int[] arr, int length)//length - кол-во разрядов в числе
         {
             List<int>[] lists = new List<int>[10];
             for (int i = 0; i < 10; i++)
@@ -50,7 +50,6 @@ namespace RadixSort
                 for (int i = 0; i < 10; ++i)
                     lists[i].Clear();
             }
-            return arr;
         }
 
         static void PrintMas(int[] arr)

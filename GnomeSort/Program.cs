@@ -15,7 +15,7 @@ namespace GnomeSort
             Console.WriteLine("Src mas");
             PrintMas(mas);
 
-            mas = GnomeSort(mas);
+            GnomeSort(mas);
 
             Console.WriteLine("Res mas");
             PrintMas(mas);
@@ -24,7 +24,7 @@ namespace GnomeSort
         }
 
         //Сложность алгоритма: O(n^2)
-        static int[] GnomeSort(int[] a)
+        public static void GnomeSort(int[] a)
         {
             int i = 1;
             while (i < a.Length)
@@ -39,7 +39,6 @@ namespace GnomeSort
                     i--;
                 }
             }
-            return a;
         }
 
         static void PrintMas(int[] arr)

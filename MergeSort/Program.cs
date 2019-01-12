@@ -12,6 +12,7 @@ namespace MergeSort
         {
             int[] mas = new int[] { 9, 6, 10, 8, 43, 2 , 6, 24, 6};
             int[] tmp = new int[3];
+
             Console.WriteLine("Src mas");
             PrintMas(mas);
 
@@ -23,7 +24,7 @@ namespace MergeSort
             Console.ReadKey();
         }
 
-        static int[] MergeSort(int[] arr)
+        public static int[] MergeSort(int[] arr)
         {
             if (arr.Length <= 1) return arr;
 

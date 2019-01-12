@@ -15,7 +15,7 @@ namespace BubbleSort
             Console.WriteLine("Src mas");
             PrintMas(mas);
 
-            mas = BubbleSort(mas);
+            BubbleSort(mas);
 
             Console.WriteLine("Res mas");
             PrintMas(mas);
@@ -24,7 +24,7 @@ namespace BubbleSort
         }
 
         //Сложность алгоритма: O(n^2)
-        static int[] BubbleSort(int[] arr) {
+        public static void BubbleSort(int[] arr) {
             bool wasSorting = false;
             for (int i = arr.Length - 1; i > 0; i--)
             {
@@ -40,9 +40,8 @@ namespace BubbleSort
                 }
                 if (wasSorting)
                     wasSorting = false;
-                else return arr;
+                else return;
             }
-            return arr;
         }
 
         static void PrintMas(int[] arr)

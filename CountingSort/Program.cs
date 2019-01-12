@@ -15,7 +15,7 @@ namespace CountingSort
             Console.WriteLine("Src mas");
             PrintMas(mas);
 
-            mas = CountingSort(mas, 0, 100);//обработать исключения в методе
+            CountingSort(mas, 0, 100);//обработать исключения в методе
 
             Console.WriteLine("Res mas");
             PrintMas(mas);
@@ -24,7 +24,7 @@ namespace CountingSort
         }
 
         //Сложность алгоритма: O(n+k)
-        static int[] CountingSort(int[] arr, int min, int max)
+        public static void CountingSort(int[] arr, int min, int max)
         {
             int[] count = new int[max - min + 1];
             int z = 0;
@@ -46,7 +46,6 @@ namespace CountingSort
                     z++;
                 }
             }
-            return arr;
         }
 
         static void PrintMas(int[] arr)

@@ -15,7 +15,7 @@ namespace BucketSort
             Console.WriteLine("Src mas");
             PrintMas(mas);
 
-            mas = BucketSort(mas);
+            BucketSort(mas);
 
             Console.WriteLine("Res mas");
             PrintMas(mas);
@@ -24,11 +24,11 @@ namespace BucketSort
         }
 
         //Сложность алгоритма: O(n)
-        static int[] BucketSort(int[] items)
+        public static void BucketSort(int[] items)
         {
             // Предварительная проверка элементов исходного массива
             if (items == null || items.Length < 2)
-                return null;
+                return;
 
             // Поиск элементов с максимальным и минимальным значениями
             int maxValue = items[0];
@@ -76,7 +76,6 @@ namespace BucketSort
                     }
                 }
             }
-            return items;
         }
 
         static void PrintMas(int[] arr)

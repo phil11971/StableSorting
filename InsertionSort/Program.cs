@@ -15,7 +15,7 @@ namespace InsertionSort
             Console.WriteLine("Src mas");
             PrintMas(mas);
 
-            mas = InsertionSort(mas);
+            InsertionSort(mas);
 
             Console.WriteLine("Res mas");
             PrintMas(mas);
@@ -24,7 +24,7 @@ namespace InsertionSort
         }
 
         //Сложность алгоритма: O(n^2)
-        static int[] InsertionSort(int[] arr)
+        public static void InsertionSort(int[] arr)
         {
             for (int i = 1; i < arr.Length; i++)
             {
@@ -37,7 +37,6 @@ namespace InsertionSort
                     prevKey--;
                 }
             }
-            return arr;
         }
 
         static void PrintMas(int[] arr)

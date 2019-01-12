@@ -15,7 +15,7 @@ namespace ShakerSort
             Console.WriteLine("Src mas");
             PrintMas(mas);
 
-            mas = ShakerSort(mas);
+            ShakerSort(mas);
 
             Console.WriteLine("Res mas");
             PrintMas(mas);
@@ -24,7 +24,7 @@ namespace ShakerSort
         }
 
         //Сложность алгоритма: O(n^2)
-        public static int[] ShakerSort(int[] array)
+        public static void ShakerSort(int[] array)
         {
             int buff;
             int left = 0;
@@ -53,7 +53,6 @@ namespace ShakerSort
                 left++;
             }
             while (left < right);
-            return array;
         }
 
         static void PrintMas(int[] arr)
